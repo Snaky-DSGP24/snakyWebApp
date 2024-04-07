@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNAKY</title>
+    <link rel="icon" href="static/images/half trans half trans.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/homepage.css">
+    <link rel="stylesheet" href="static/css/image-slider.css">'
+    <link rel="stylesheet" href="static/css/dragdrop.css">
+
+</head>
+
+<body>
+    <!-- Chatbot -->
+    <div id="myChatbotContainer" class="chatbot-container">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <div id="chat-widget" class="card shadow chatbot-window">
+            <div class="card-header  text-black" style="border-bottom: #1783ff solid; color: #000; font-size: 30px;">
+                SNAKY <b>CHAT</b>
+                <!-- <button id="chat-widget-close-button" type="button" class="btn-close float-end"
+                            aria-label="Close"></button> -->
+            </div>
+
+            <div class="card-body scroll" id="chat-widget-messages">
+                <div style='display: flex; align-items: center;'>
+                    <div
+                        style='max-width: 25vw; background-color: rgb(92, 161, 252); border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
+                        <span style='font-size: 0.85rem; font-weight: bold; color: #fff;'>SNAKY BOT</span>
+                        <div style='color: #151515; margin-top: 5px;'>{% if pred_text %}
+
+                            <p id="predict-result">The snake in the image is likely a {{ pred_text }}</p>
+                            <br><br>
+                            <p>For Further Information These questions can be asked,<br>
+                            <div>
+                                <ul>
+                                    <li>{{ pred_text }} information</li>
+                                    <li>{{ pred_text }} locations</li>
+                                    <li>{{ pred_text }} appearance</li>
+                                    <li>{{ pred_text }} bite symptoms</li>
+                                    <li>{{ pred_text }} bite treatment</li>
+                                </ul>
+                            </div>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+            <div class=" card-footer">
+                <input type="text" class="form-control" id="chat-widget-input" name="" placeholder="Type here...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Home page -->
+    <div class="banner">
+        <div class="navbar">
+            <img src="static/images/full trans logo.png" class="mainlogo">
+            <ul>
+                <li><a href="" onclick="topFunction()">Home</a></li>
+                <li><a href="#upload-file">Upload Image</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#footer-container">Contact Us</a></li>
+            </ul>
+            <img src="static/images/chatbot black.png" class="chatbotlogo" onclick="openNav()">
+        </div>
+        <div class="content">
+            <h1 style="color: #fefefe;">Introducing: SNAKY</h1>
+            <p style="color: #fefefe;"> Sri Lanka's Best Snake Identification System.<br>Upload the image below and
+                watch us do the magic</p>
+        </div>
+
+        <div>
+            <form action="/predict" id="upload-file" method="post" enctype="multipart/form-data">
+                <div class="UploadButton">
+                    <label for="imageUpload" class="upload-label" style="cursor: pointer;"><span></span></label>
+                    <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg">
+                </div>
+
+                <div id="panel-container" class="panel-container" style="display: none;">
+                    <div id="uploaded-image-container" style="display: none;">
+                        <h2 style="color: black;">Uploaded Image:</h2>
+                        <img id="uploaded-image" src="#" alt="Uploaded Image" style="width: 30vw; height: 50vh;">
+                    </div>
+
+                    <a id="close-panel-btn" href="javascript:void(0)">Close</a>
+                    <button id="predict-btn">Predict</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <hr class=" rounded">
+
+    <!-- image slider -->
+    <div class="image-slider-container">
+        <h1>THE SNAKES WE CAN IDENTIFY</h1>
+        <div class="image-slider">
+            <div class="slide">
+                <div class="item" style="background-image: url(static/images/snakes/green-pit-viper-img.jpeg);">
+                    <div class="content">
+                        <div class="name">Sri Lankan Green Pit Viper</div>
+                        <div class="des">The Sri Lankan Green Pit Viper, native to Sri Lanka, is a venomous snake known
+                            for its striking green coloration. It
+                            inhabits trees, has a triangular head, and grows up to 130 cm in length. Despite its venom,
+                            it poses minimal danger to
+                            humans. 🐍🌿
+                        </div>
+                        <a href="https://www.projectnoah.org/spottings/808516002"><button>See More</button></a>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(static/images/snakes/russels-viper-img.jpeg);">
+                    <div class="content">
+                        <div class="name">Russel's Viper</div>
+                        <div class="des">The Russell's Viper, found in the Indian subcontinent, is a highly venomous
+                            snake. It has a heavy body, triangular head,
+                            and distinctive crossbands. Despite its danger, it plays a crucial role in maintaining
+                            ecological balance. 🐍🌿
+                        </div>
+                        <a href="https://animals.net"><button>See More</button></a>
+                    </div>
+                </div>
+
+                <div class="item" style="background-image: url(static/images/snakes/common-rattle-snake-img.jpg);">
+                    <div class="content">
+                        <div class="name">Common Rattle Snake</div>
+                        <div class=" des">The Common Rattlesnake, a highly specialized and venomous reptile, boasts a
+                            large body and a distinctive triangle-shaped
+                            head. What sets it apart is the iconic “rattle” found at the tip of its tail. This rattle,
+                            composed of interlocking
+                            scales, warns potential threats to keep their distance. Despite their fearsome reputation,
+                            rattlesnakes typically bite
+                            only when provoked or cornered. 🐍🔔
+                        </div>
+                        <a href="https://animals.net/rattlesnake/"><button>See More</button></a>
+                    </div>
+                </div>
+
+                <div class="item" style="background-image: url(static/images/snakes/cat-eyed.jpeg);">
+                    <div class="content">
+                        <div class="name">Cat-eyed snake</div>
+                        <div class="des">The Cat-Eyed Snake, also known as the Boiga, belongs to a diverse genus of
+                            snakes. Their name stems from their vertical
+                            slit pupils, resembling those of cats. These snakes exhibit various appearances, from black
+                            with yellow bands to brown
+                            or tan with dark mottling. While many species are venomous, their venom is typically mild
+                            and poses little danger to
+                            humans. Cat-eyed snakes inhabit tropical rainforests, mangroves, and open woodlands across
+                            Asia, India, and parts of
+                            Africa. 🐍🌿
+                        </div>
+                        <a href="https://animals.net/cat-snake/"><button>See More</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button">
+                <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="next"><i class="fa-solid fa-arrow-right black"></i></button>
+            </div>
+
+        </div>
+    </div>
+
+    <hr class="rounded" style="margin-bottom: 8vh;">
+
+    <!-- about us -->
+    <div class="about-us-container">
+
+        <h1>ABOUT US</h1>
+        <div class="about-us">
+
+            <div class="about-us-text">
+
+                <br>
+                <p style="color: #000;">
+                    <b style="color: #000;">Welcome to Snaky! </b><br><br>
+
+                    At Snaky, <b style="color: #000;">our mission</b> is to provide global education on
+                    snakes through
+                    identification. We're
+                    passionate about raising
+                    awareness not only of the vital role snakes play in our ecosystem but also their
+                    significance in
+                    medicine and scientific
+                    research. Our team of experts is dedicated to helping you identify these fascinating
+                    creatures,
+                    whether you encounter
+                    them in your backyard or during your travels. 🐍<br><br>
+
+                    <b style="color: #000;">Why do we do what we do?</b> Because we believe that
+                    understanding and
+                    appreciating snakes is
+                    essential
+                    for a balanced and
+                    harmonious world. Our commitment extends beyond mere identification; we're here to share
+                    knowledge,
+                    dispel myths, and
+                    foster a deeper appreciation for these remarkable reptiles.<br><br>
+
+                    So, whether you're a curious nature enthusiast, a budding herpetologist, or someone who
+                    simply wants
+                    to learn more,
+                    Snaky is your go-to resource. Explore our image-rich database, engage with our friendly
+                    chatbot, and
+                    embark on a journey
+                    of snake discovery like never before!<br><br>
+
+                    Join us in celebrating the beauty, diversity, and importance of snakes. Let's unravel
+                    their secrets
+                    together! 🌿🔍
+                </p>
+            </div>
+            <div class="about-us-img">
+                <img src="static/images/full trans logo.png">
+            </div>
+        </div>
+    </div>
+
+    <hr class="rounded" style="margin-bottom: 8vh;">
+
+    <!-- our team -->
+    <div class="our-team-container" id="about-us">
+        <h1>OUR TEAM</h1>
+        <br><br><br>
+
+        <div class="cards-container">
+            <ul>
+                <li>
+                    <figure class="snip0015">
+                        <img src="static/images/people/nina.jpeg" alt="sample38" />
+                        <figcaption>
+                            <h2>Nina Abeyratne</h2>
+                            <p>Snake Identification Model/ Backend</p>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="snip0015">
+                        <img src="static/images/people/Gouri.jpg" alt="sample38" />
+                        <figcaption>
+                            <h2>Gouri Napevithanage</h2>
+                            <p>Chatbot/Frontend/Backend</p>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="snip0015">
+                        <img src="static/images/people/nisitha.jpg" alt="sample38" />
+                        <figcaption>
+                            <h2>Nisitha Wickramarachchi</h2>
+                            <p>Snake species identification model/ backend</p>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <hr class="rounded" style="margin-bottom: 22vh;">
+
+    <!-- Footer -->
+    <footer>
+        <div class="main-content">
+            <div class="left box">
+                <div class="content">
+                    <ul>
+                        <li><img src="static/images/full trans logo.png" alt="" srcset=""></li>
+                        <li>SNAKY</li>
+                    </ul>
+                    <div class="social">
+                        <a href="https://facebook.com/coding.np"><span class="fab fa-facebook-f"></span></a>
+                        <a href="#"><span class="fab fa-twitter"></span></a>
+                        <a href="https://instagram.com/coding.np"><span class="fab fa-instagram"></span></a>
+                        <a href="https://youtube.com/c/codingnepal"><span class="fab fa-youtube"></span></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="right box">
+                <div class="content">
+                    <h3>Feedback Form</h3>
+                    <form action="#">
+                        <div class="email">
+                            <div class="text">Email *</div>
+                            <input type="email" required>
+                        </div>
+                        <div class="msg">
+                            <div class="text">Message *</div>
+                            <textarea rows="2" cols="25" required></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <center>
+                <span class="credit">Created By <a href="">Group 24</a> | </span>
+                <span class="far fa-copyright"></span><span> 2020 All rights reserved.</span>
+            </center>
+        </div>
+    </footer>
+
+
+    <script src="static/js/image-slider.js"></script>
+    <script src="static/js/index.js"></script>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/dragdrop.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            openNav();
+        });
+    </script>
+</body>
+
+</html>

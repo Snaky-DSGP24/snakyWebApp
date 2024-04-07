@@ -1,0 +1,6 @@
+numpy
+keras
+opencv-python
+pillow
+Flask
+rasa
